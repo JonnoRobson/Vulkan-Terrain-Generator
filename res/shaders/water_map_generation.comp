@@ -1,0 +1,226 @@
+#version 450
+#extension GL_ARB_separate_shader_objects : enable
+
+// inputs
+#define WORKGROUP_SIZE 32
+layout(local_size_x = WORKGROUP_SIZE, local_size_y = WORKGROUP_SIZE, local_size_z = 1) in;
+
+// output image
+layout(binding = 0, r16f) uniform image2D waterMap;
+
+// uniform buffers
+layout(binding = 1) uniform WaterGenData
+{
+	vec2 position_offset;
+	float seed;
+	float size;
+	float terrain_size;
+	float terrain_chunk_size;
+	float height_offset;
+	float decay_value;
+	float water_level;
+	vec3 padding;
+} water_data;
+
+// heightmaps
+layout(binding = 2, r16f) uniform image2D heightmaps[25];
+
+// perlin noise permutation data
+int permutation[512] = {
+	151,160,137,91,90,15, 131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,
+	8,99,37,240,21,10,23, 190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,
+	117,35,11,32,57,177,33,88,237,149,56,87,174,20,125,136,171,168, 68,175,74,
+	165,71,134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,133,230,220,
+	105,92,41,55,46,245,40,244,102,143,54, 65,25,63,161, 1,216,80,73,209,76,132,
+	187,208, 89,18,169,200,196,135,130,116,188,159,86,164,100,109,198,173,186,
+	3,64,52,217,226,250,124,123,5,202,38,147,118,126,255,82,85,212,207,206,59,
+	227,47,16,58,17,182,189,28,42,223,183,170,213,119,248,152, 2,44,154,163,70,
+	221,153,101,155,167, 43,172,9,129,22,39,253, 19,98,108,110,79,113,224,232,178,
+	185, 112,104,218,246,97,228,251,34,242,193,238,210,144,12,191,179,162,241,
+	81,51,145,235,249,14,239,107,49,192,214, 31,181,199,106,157,184, 84,204,
+	176,115,121,50,45,127, 4,150,254,138,236,205,93,222,114,67,29,24,72,243,141,
+	128,195,78,66,215,61,156,180,151,160,137,91,90,15, 131,13,201,95,96,53,194,
+	233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23, 190, 6,148,247,120,234,
+	75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,88,237,149,56,87,174,20,
+	125,136,171,168, 68,175,74,165,71,134,139,48,27,166,77,146,158,231,83,111,229,
+	122,60,211,133,230,220,105,92,41,55,46,245,40,244,102,143,54, 65,25,63,161,
+	1,216,80,73,209,76,132,187,208, 89,18,169,200,196,135,130,116,188,159,86,
+	164,100,109,198,173,186,3,64,52,217,226,250,124,123,5,202,38,147,118,126,255,
+	82,85,212,207,206,59,227,47,16,58,17,182,189,28,42,223,183,170,213,119,248,152,
+	2,44,154,163,70,221,153,101,155,167, 43,172,9,129,22,39,253, 19,98,108,110,79,
+	113,224,232,178,185, 112,104,218,246,97,228,251,34,242,193,238,210,144,12,191,
+	179,162,241,81,51,145,235,249,14,239,107,49,192,214, 31,181,199,106,157,184,
+	84,204,176,115,121,50,45,127, 4,150,254,138,236,205,93,222,114,67,29,24,72,243,
+	141,128,195,78,66,215,61,156,180
+};
+
+double fade(double fadeValue)
+{
+	return fadeValue * fadeValue * fadeValue * (fadeValue * (fadeValue * 6 - 15) + 10);
+}
+
+double grad(int hash, double x, double y, double z)
+{
+	int h = hash & 15;
+	double u = h < 8 ? x : y;
+	double v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+	return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+}
+
+double improved_perlin_noise(double x, double y, double z)
+{
+	int X = int(floor(x)) & 255;
+	int Y = int(floor(y)) & 255;
+	int Z = int(floor(z)) & 255;
+
+	x -= floor(x);
+	y -= floor(y);
+	z -= floor(z);
+
+	double u = fade(x);
+	double v = fade(y);
+	double w = fade(z);
+
+	int A	= permutation[X] + Y;
+	int AA	= permutation[A] + Z;
+	int AB	= permutation[A + 1] + Z;
+	int B	= permutation[X + 1] + Y;
+	int BA	= permutation[B] + Z;
+	int BB	= permutation[B + 1] + Z;
+
+	double x1, x2, y1, y2;
+
+	x1 = mix(grad(permutation[AA], x, y, z), grad(permutation[BA], x-1, y, z), u);
+	x2 = mix(grad(permutation[AB], x, y-1, z), grad(permutation[BB], x-1, y-1, z), u);
+	y1 = mix(x1, x2, v);
+
+	x1 = mix(grad(permutation[AA+1], x, y, z-1), grad(permutation[BA+1], x-1, y, z-1), u);
+	x2 = mix(grad(permutation[AB+1], x, y-1, z-1), grad(permutation[BB+1], x-1, y-1, z-1), u);
+	y2 = mix(x1, x2, v);
+
+	return mix(y1, y2, w);
+}
+
+float random (in vec2 uv) {
+    return fract(sin(dot(uv.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+float noise(vec2 uv)
+{
+	vec2 i = floor(uv);
+	vec2 f = fract(uv);
+
+	// Four corners in 2D of a tile
+    float a = random(i);
+    float b = random(i + vec2(1.0, 0.0));
+    float c = random(i + vec2(0.0, 1.0));
+    float d = random(i + vec2(1.0, 1.0));
+
+    vec2 u = f * f * (3.0 - 2.0 * f);
+
+    return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+}
+
+
+void main()
+{
+	if(gl_GlobalInvocationID.x >= water_data.size || gl_GlobalInvocationID.y >= water_data.size)
+		return;
+
+	vec2 imageCoords = gl_GlobalInvocationID.xy / water_data.size;
+	vec2 offsetCoords = water_data.position_offset / water_data.size;
+
+	float flowValue = 0.0f;
+	// chek if this pixel is the end of an existing water source
+	flowValue = imageLoad(waterMap, ivec2(gl_GlobalInvocationID.xy)).r;
+	if(flowValue >= 0)
+	{
+		//return;
+	}	
+
+	// determine heightmap index and coords
+	vec2 heightmapChunkDimensions = vec2(water_data.size, water_data.size) / water_data.terrain_chunk_size;
+	vec2 heightmapIndices;
+
+	ivec2 currentWaterCoord = ivec2(gl_GlobalInvocationID.xy);
+	//heightmapIndices = floor(vec2(currentWaterCoord.xy / heightmapChunkDimensions));
+	//vec2 heightmapCoords = (vec2(currentWaterCoord.xy) / heightmapChunkDimensions) - heightmapIndices;
+	//heightmapCoords = heightmapCoords * water_data.terrain_size;
+	vec2 heightmapCoords = modf(vec2(currentWaterCoord.xy) / heightmapChunkDimensions, heightmapIndices) * water_data.terrain_size;
+	int heightmapIndex = int(heightmapIndices.x) + (int(water_data.terrain_chunk_size - heightmapIndices.y - 1) * int(water_data.terrain_chunk_size));
+	
+	// if pixel is empty then check if pixel is water source
+	float currentHeight = imageLoad(heightmaps[heightmapIndex], ivec2(heightmapCoords)).r;
+	
+	float waterHeight = water_data.water_level - (clamp(currentHeight - water_data.water_level, 0, 1));
+	imageStore(waterMap, currentWaterCoord, vec4(waterHeight, 0, 0, 0));
+	return;
+
+	/*
+	// river sim
+	float waterHeight = 0;
+	if(flowValue < 0)
+	{
+		waterHeight = noise(vec2(gl_GlobalInvocationID.xy)) * 10.0;
+		flowValue = max(currentHeight - (waterHeight + water_data.height_offset), 0);
+	}
+	
+	imageStore(waterMap, currentWaterCoord, vec4(currentHeight, 0, 0, 0));
+
+	if(flowValue <= 0)
+		return;
+
+	// simulate water flow
+	int safety_counter = 0;
+	ivec2 prevWaterCoords = ivec2(-1, -1);
+	while(flowValue < 0)
+	{
+		// find the lowest surrounding height
+		ivec2 lowestOffset = ivec2(-1, -1);
+		float lowestHeight = 1e5f;
+		
+		for(int y = -1; y <= 1; y++)
+		{
+			for(int x = -1; x <= 1; x++)
+			{
+				ivec2 offsetWaterCoords = currentWaterCoord + ivec2(x, y);
+
+				if(offsetWaterCoords.x >= water_data.size || offsetWaterCoords.y >= water_data.size || offsetWaterCoords.x < 0 || offsetWaterCoords.y < 0)
+					continue;
+
+				heightmapCoords = modf(vec2(offsetWaterCoords.xy) / heightmapChunkDimensions, heightmapIndices) * water_data.terrain_size;
+				heightmapIndex = int(heightmapIndices.x) + (int(water_data.terrain_chunk_size - heightmapIndices.y - 1) * int(water_data.terrain_chunk_size));
+
+				float offsetHeight = imageLoad(heightmaps[heightmapIndex], ivec2(heightmapCoords)).r;
+
+				// check that height is lower and water doesn't flow back on itself
+				if(offsetHeight < lowestHeight && offsetWaterCoords != prevWaterCoords)
+				{
+					lowestHeight = offsetHeight;
+					lowestOffset = ivec2(x, y);
+				}
+			}
+		}
+
+		// check if the lowest height is lower than the current height
+		flowValue = flowValue + (currentHeight - lowestHeight);
+		prevWaterCoords = currentWaterCoord;
+		currentHeight = lowestHeight;
+		currentWaterCoord = currentWaterCoord + lowestOffset;
+		
+		if(currentHeight < water_data.water_level)
+		{
+			imageStore(waterMap, currentWaterCoord, vec4(water_data.water_level, 0, 0, 0));
+			return;
+		}
+		else
+		{
+			imageStore(waterMap, currentWaterCoord, vec4(currentHeight, 0, 0, 0));
+		}
+
+		safety_counter++;
+		if(safety_counter > 1024)
+			return;
+	}
+	*/
+}

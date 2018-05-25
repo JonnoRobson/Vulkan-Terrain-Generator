@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{609CB4E4-C5B0-4607-BFA6-75400DD1E07F}</ProjectGuid>
+    <RootNamespace>VulkanApp</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Libraries\tinyobjloader-master;C:\Libraries\stb-master;C:\Libraries\glm-0.9.9-a1;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\VulkanSDK\1.0.61.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.0.61.1\Lib;C:\Libraries\glfw-3.2.1.bin.WIN64\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Libraries\tinyobjloader-master;C:\Libraries\stb-master;C:\Libraries\glm-0.9.9-a1;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\VulkanSDK\1.0.61.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.0.61.1\Lib;C:\Libraries\glfw-3.2.1.bin.WIN64\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="app.cpp" />
+    <ClCompile Include="camera.cpp" />
+    <ClCompile Include="compute_shader.cpp" />
+    <ClCompile Include="device.cpp" />
+    <ClCompile Include="HDR.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="pipelines\buffer_visualisation_pipeline.cpp" />
+    <ClCompile Include="pipelines\compute_pipeline.cpp" />
+    <ClCompile Include="pipelines\gaussian_blur_pipeline.cpp" />
+    <ClCompile Include="pipelines\heightmap_generation_pipeline.cpp" />
+    <ClCompile Include="pipelines\ldr_suppress_pipeline.cpp" />
+    <ClCompile Include="pipelines\pipeline.cpp" />
+    <ClCompile Include="pipelines\terrain_rendering_pipeline.cpp" />
+    <ClCompile Include="pipelines\tonemap_pipeline.cpp" />
+    <ClCompile Include="pipelines\watermap_generation_pipeline.cpp" />
+    <ClCompile Include="pipelines\water_rendering_pipeline.cpp" />
+    <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="render_target.cpp" />
+    <ClCompile Include="shader.cpp" />
+    <ClCompile Include="shape.cpp" />
+    <ClCompile Include="skybox.cpp" />
+    <ClCompile Include="swap_chain.cpp" />
+    <ClCompile Include="terrain_generator.cpp" />
+    <ClCompile Include="texture.cpp" />
+    <ClCompile Include="texture_cache.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app.h" />
+    <ClInclude Include="compute_shader.h" />
+    <ClInclude Include="device.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="HDR.h" />
+    <ClInclude Include="mesh.h" />
+    <ClInclude Include="pipelines\buffer_visualisation_pipeline.h" />
+    <ClInclude Include="pipelines\compute_pipeline.h" />
+    <ClInclude Include="pipelines\gaussian_blur_pipeline.h" />
+    <ClInclude Include="pipelines\heightmap_generation_pipeline.h" />
+    <ClInclude Include="pipelines\ldr_suppress_pipeline.h" />
+    <ClInclude Include="pipelines\pipeline.h" />
+    <ClInclude Include="pipelines\terrain_rendering_pipeline.h" />
+    <ClInclude Include="pipelines\tonemap_pipeline.h" />
+    <ClInclude Include="pipelines\watermap_generation_pipeline.h" />
+    <ClInclude Include="pipelines\water_rendering_pipeline.h" />
+    <ClInclude Include="render_target.h" />
+    <ClInclude Include="shape.h" />
+    <ClInclude Include="input.h" />
+    <ClInclude Include="renderer.h" />
+    <ClInclude Include="shader.h" />
+    <ClInclude Include="skybox.h" />
+    <ClInclude Include="swap_chain.h" />
+    <ClInclude Include="terrain_generator.h" />
+    <ClInclude Include="texture.h" />
+    <ClInclude Include="texture_cache.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\res\shaders\buffer_visualisation.frag" />
+    <None Include="..\res\shaders\buffer_visualisation.vert" />
+    <None Include="..\res\shaders\combined_perlin_heightmap.comp" />
+    <None Include="..\res\shaders\fbm_perlin_heightmap.comp" />
+    <None Include="..\res\shaders\fractal_effect_generation.comp" />
+    <None Include="..\res\shaders\gaussian_blur.frag" />
+    <None Include="..\res\shaders\ldr_suppress.frag" />
+    <None Include="..\res\shaders\screen_space.vert" />
+    <None Include="..\res\shaders\skybox.frag" />
+    <None Include="..\res\shaders\skybox.vert" />
+    <None Include="..\res\shaders\terrain.frag" />
+    <None Include="..\res\shaders\terrain.geom" />
+    <None Include="..\res\shaders\terrain.vert" />
+    <None Include="..\res\shaders\tessellated_terrain.frag" />
+    <None Include="..\res\shaders\tessellated_terrain.geom" />
+    <None Include="..\res\shaders\tessellated_terrain.tesc" />
+    <None Include="..\res\shaders\tessellated_terrain.tese" />
+    <None Include="..\res\shaders\tessellated_terrain.vert" />
+    <None Include="..\res\shaders\tonemap.frag" />
+    <None Include="..\res\shaders\water_map_generation.comp" />
+    <None Include="..\res\shaders\water_render.frag" />
+    <None Include="..\res\shaders\water_render.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

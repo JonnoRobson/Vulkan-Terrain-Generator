@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shader Files">
+      <UniqueIdentifier>{4a8d4937-3403-4a92-944a-210ac4336c5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\pipelines">
+      <UniqueIdentifier>{83c0dfc7-846a-4678-b852-4eedeaa48d4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\pipelines">
+      <UniqueIdentifier>{a9e409ab-4f44-439d-ad5f-aa6924bcf828}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="device.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="swap_chain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="render_target.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_cache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="compute_shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\buffer_visualisation_pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\compute_pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\heightmap_generation_pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="terrain_generator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\terrain_rendering_pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\watermap_generation_pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\gaussian_blur_pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\ldr_suppress_pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\tonemap_pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+    <ClCompile Include="HDR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pipelines\water_rendering_pipeline.cpp">
+      <Filter>Source Files\pipelines</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="swap_chain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="render_target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_cache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compute_shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skybox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\buffer_visualisation_pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\heightmap_generation_pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\compute_pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="terrain_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\terrain_rendering_pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\watermap_generation_pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\gaussian_blur_pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\ldr_suppress_pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\tonemap_pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+    <ClInclude Include="HDR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pipelines\water_rendering_pipeline.h">
+      <Filter>Header Files\pipelines</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\res\shaders\buffer_visualisation.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\buffer_visualisation.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\skybox.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\skybox.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\screen_space.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\combined_perlin_heightmap.comp">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\fbm_perlin_heightmap.comp">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\fractal_effect_generation.comp">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\tessellated_terrain.tese">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\tessellated_terrain.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\tessellated_terrain.geom">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\tessellated_terrain.tesc">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\tessellated_terrain.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\terrain.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\terrain.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\terrain.geom">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\water_map_generation.comp">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\gaussian_blur.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\ldr_suppress.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\tonemap.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\water_render.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\res\shaders\water_render.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

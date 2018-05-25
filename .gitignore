@@ -1,0 +1,11 @@
+VulkanApp.sdf
+VulkanApp.VC.db
+VulkanApp.VC.VC.opendb
+res/data/
+x64/res/data/
+*.tlog
+x64/
+Debug/
+VulkanApp/x64/
+error.txt
+.vs/
